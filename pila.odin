@@ -18,12 +18,14 @@ main :: proc() {
     }
 
     source, err := os.read_entire_file_from_path(os.args[1], context.allocator)
+    defer delete(source, context.allocator)
+    
     if err != nil  {
         fmt.eprintln(MESSAGE_FILE_READ_ERROR)
         os.exit(1)
     }
 
-    defer delete(source, context.allocator)
+    parser := Parser{0, source}
 
-    fmt.println(string(source))
+    fmt.println(string(parser.source))
 }
