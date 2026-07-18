@@ -4,7 +4,10 @@ import "core:fmt"
 
 MESSAGE ::
 `pila virtual machine
-Usage:`
+Usage:
+    pila [flags] <filename>
+Flags:
+    -v  Prints pila verison to console`
 
 usage :: proc() {
     fmt.eprintln(MESSAGE)
