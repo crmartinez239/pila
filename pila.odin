@@ -9,6 +9,11 @@ main :: proc() {
         os.exit(1)
     }
 
+    if os.args[1] == "-v" {
+        version()
+        os.exit(0)
+    }
+
     source, err := os.read_entire_file_from_path(os.args[1], context.allocator)
     if err != nil  {
         fmt.eprintln("Could not read file.")
