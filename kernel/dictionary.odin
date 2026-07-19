@@ -39,14 +39,10 @@ init_dictionary :: proc() -> ^Word {
 }
 
 find_word :: proc(name: string, latest: ^Word) -> ^Word {
-    if latest.name == name do return latest
-    prev := latest.link
-    for prev != nil {
-        if prev.name == name {
-            return prev
-        } else {
-            prev = prev.link
-        }
+    current := latest.link
+    for current != nil {
+        if current.name == name do return current
+        current = current.link
     }
     return nil
 }
