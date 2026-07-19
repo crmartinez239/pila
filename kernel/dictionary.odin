@@ -26,14 +26,27 @@ init_dictionary :: proc() -> ^Word {
     prev: ^Word = nil
     
     for i in 0..<len(primitives) {
-        w := Word {
+        w := new(Word)
+        w^ = Word {
             prev,
             primitives[i].name,
             primitives[i].cfa,
         }
-        prev = &w
-    }
-    
+        prev = w
+    }    
     // return the latest word in the list
     return prev
+}
+
+find_word :: proc(name: string, latest: ^Word) -> ^Word {
+    if latest.name == name do return latest
+    prev := latest.link
+    for prev != nil {
+        if prev.name == name {
+            return prev
+        } else {
+            prev = prev.link
+        }
+    }
+    return nil
 }
