@@ -31,6 +31,7 @@ main :: proc() {
     // pila vm init
     latest := kernel.init_dictionary()
     data_stack: [dynamic]u64
+    defer delete(data_stack)
     
     // init outer interpreter
     parser := Parser {
@@ -42,8 +43,7 @@ main :: proc() {
     // outer interpreter loop
     for {
         token := next_token(&parser)
-        defer delete(token, context.allocator)
-        
+
         if token == "" {
             fmt.println("pila program exit")
             break
