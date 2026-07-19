@@ -2,6 +2,7 @@ package pila
 
 import "core:fmt"
 import "core:os"
+import "kernel"
 
 COMMAND_VERSION :: "-v"
 MESSAGE_FILE_READ_ERROR :: "Could not read file."
@@ -17,15 +18,20 @@ main :: proc() {
         os.exit(0)
     }
 
-    source, err := os.read_entire_file_from_path(os.args[1], context.allocator)
-    defer delete(source, context.allocator)
+
+    latest := kernel.init_dictionary()
+    latest.cfa()
     
-    if err != nil  {
-        fmt.eprintln(MESSAGE_FILE_READ_ERROR)
-        os.exit(1)
-    }
+    // source, err := os.read_entire_file_from_path(os.args[1], context.allocator)
+    // defer delete(source, context.allocator)
+    
+    // if err != nil  {
+    //     fmt.eprintln(MESSAGE_FILE_READ_ERROR)
+    //     os.exit(1)
+    // }
+    
+    //parser := Parser{0, source}
+    //data_stack: [dynamic]u64
 
-    parser := Parser{0, source}
-
-    fmt.println(string(parser.source))
+  //  fmt.println(string(parser.source))
 }
