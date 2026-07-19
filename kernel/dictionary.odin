@@ -2,17 +2,17 @@ package kernel
 
 import "core:fmt"
 
-CodeField :: proc(data_stack: ^[dynamic]u64)
+NativeProc :: proc(data_stack: ^[dynamic]u64)
 
 Primitive :: struct {
     name: string,
-    cfa: CodeField,
+    cfa: NativeProc,
 }
 
 Word :: struct {
     link: ^Word, // LFA
     name: string, // NFA
-    cfa: CodeField,
+    cfa: NativeProc,
 }
 
 init_dictionary :: proc() -> ^Word {

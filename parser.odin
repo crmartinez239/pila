@@ -1,7 +1,6 @@
 package pila
 
-
-ParserState :: enum {
+ ParserState :: enum {
     Interpret, 
     Compile,
 }
