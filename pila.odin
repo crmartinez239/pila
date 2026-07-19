@@ -18,20 +18,28 @@ main :: proc() {
         os.exit(0)
     }
 
+    source, err := os.read_entire_file_from_path(os.args[1], context.allocator)
+    defer delete(source, context.allocator)
+    
+    if err != nil  {
+        fmt.eprintln(MESSAGE_FILE_READ_ERROR)
+        os.exit(1)
+    }
 
+    // pila vm init
     latest := kernel.init_dictionary()
-    latest.cfa()
+    data_stack: [dynamic]u64
     
-    // source, err := os.read_entire_file_from_path(os.args[1], context.allocator)
-    // defer delete(source, context.allocator)
-    
-    // if err != nil  {
-    //     fmt.eprintln(MESSAGE_FILE_READ_ERROR)
-    //     os.exit(1)
-    // }
-    
-    //parser := Parser{0, source}
-    //data_stack: [dynamic]u64
+    parser := Parser{0, source}
 
-  //  fmt.println(string(parser.source))
+    for {
+        token := next_token(&parser)
+        if token == "" {
+            fmt.println("pila program exit")
+            break
+        } else {
+            fmt.println(token)
+        }
+    }
+
 }
