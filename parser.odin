@@ -1,7 +1,14 @@
 package pila
 
+
+ParserState :: enum {
+    Interpret, 
+    Compile,
+}
+
 Parser :: struct {
     pos: int,
+    state: ParserState,
     source: []u8,
 }
 

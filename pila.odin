@@ -30,8 +30,14 @@ main :: proc() {
     latest := kernel.init_dictionary()
     data_stack: [dynamic]u64
     
-    parser := Parser{0, source}
+    // init outer interpreter
+    parser := Parser {
+        0, 
+        ParserState.Interpret,
+        source,
+    }
 
+    // outer interpreter loop
     for {
         token := next_token(&parser)
         if token == "" {
