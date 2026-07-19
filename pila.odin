@@ -2,6 +2,7 @@ package pila
 
 import "core:fmt"
 import "core:os"
+import "core:strconv"
 import "kernel"
 
 COMMAND_VERSION :: "-v"
@@ -33,19 +34,33 @@ main :: proc() {
     // init outer interpreter
     parser := Parser {
         0, 
-        ParserState.Interpret,
+        ParserState.Interpret,  
         source,
     }
 
-    // outer interpreter loop
+//  outer interpreter loop
     for {
         token := next_token(&parser)
         if token == "" {
             fmt.println("pila program exit")
             break
-        } else {
-            fmt.println(token)
         }
+
+        word := kernel.find_word(token, latest)
+        if word != nil {
+            word.cfa(&data_stack)
+            continue
+        }
+
+        u, ok := strconv.parse_u64_of_base(token, 10)
+        if ok {
+            append(&data_stack, u)
+            continue
+        }
+
+        // not a word or usable number
+        fmt.eprintln("undefined word")
+        os.exit(1)
     }
 
 }
