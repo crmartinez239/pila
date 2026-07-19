@@ -2,7 +2,7 @@ package kernel
 
 import "core:fmt"
 
-CodeField :: proc()
+CodeField :: proc(data_stack: ^[dynamic]u64)
 
 Primitive :: struct {
     name: string,

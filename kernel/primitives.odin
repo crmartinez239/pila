@@ -1,13 +1,15 @@
 package kernel
 
-DUP :: proc() {
+import "core:fmt"
+
+DUP :: proc(data_stack: ^[dynamic]u64) {
     fmt.println("DUP command successful")
 }
 
-DROP :: proc() {
+DROP :: proc(data_stack: ^[dynamic]u64) {
     fmt.println("DROP command successful")
 }
 
-SWAP :: proc() {
+SWAP :: proc(data_stack: ^[dynamic]u64) {
     fmt.println("SWAP command successful")
 }
