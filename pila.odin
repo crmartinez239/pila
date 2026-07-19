@@ -3,6 +3,7 @@ package pila
 import "core:fmt"
 import "core:os"
 import "core:strconv"
+
 import "kernel"
 
 COMMAND_VERSION :: "-v"
@@ -38,9 +39,11 @@ main :: proc() {
         source,
     }
 
-//  outer interpreter loop
+    // outer interpreter loop
     for {
         token := next_token(&parser)
+        defer delete(token, context.allocator)
+        
         if token == "" {
             fmt.println("pila program exit")
             break
