@@ -1,7 +1,5 @@
 package kernel
 
-import "core:fmt"
-
 NativeProc :: proc(data_stack: ^[dynamic]u64)
 
 Primitive :: struct {
