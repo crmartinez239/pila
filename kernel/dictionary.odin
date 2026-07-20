@@ -17,7 +17,7 @@ Word :: struct {
 
 init_dictionary :: proc() -> ^Word {
 
-    primitives := []Primitive {
+    primitives := [3]Primitive {
         {"DUP", DUP},
         {"DROP", DROP},
         {"SWAP", SWAP},
@@ -36,6 +36,15 @@ init_dictionary :: proc() -> ^Word {
     }    
     // return the latest word in the list
     return prev
+}
+
+free_dictionary :: proc(latest_word: ^Word) {
+    current := latest_word
+    for current != nil {
+        next := current.link
+        free(current)
+        current = next
+    }
 }
 
 find_word :: proc(name: string, latest: ^Word) -> ^Word {

@@ -29,7 +29,9 @@ main :: proc() {
     }
 
     // pila vm init
-    latest := kernel.init_dictionary()
+    latest_word := kernel.init_dictionary()
+    defer kernel.free_dictionary(latest_word)
+
     data_stack: [dynamic]u64
     defer delete(data_stack)
     
@@ -45,12 +47,12 @@ main :: proc() {
         token := next_token(&parser)
 
         if token == "" {
-            memory_dump(&data_stack, latest)
+            memory_dump(&data_stack, latest_word)
             fmt.println("pila program exit")
             break
         }
 
-        word := kernel.find_word(token, latest)
+        word := kernel.find_word(token, latest_word)
         if word != nil {
             switch parser.state {
                 case ParserState.Compile:
