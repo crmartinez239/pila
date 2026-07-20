@@ -45,14 +45,21 @@ main :: proc() {
         token := next_token(&parser)
 
         if token == "" {
+            memory_dump(&data_stack, latest)
             fmt.println("pila program exit")
             break
         }
 
         word := kernel.find_word(token, latest)
         if word != nil {
-            word.cfa(&data_stack)
-            continue
+            switch parser.state {
+                case ParserState.Compile:
+                    fallthrough
+                
+                case ParserState.Interpret:
+                    word.cfa(&data_stack)
+                    continue
+            }
         }
 
         u, ok := strconv.parse_u64_of_base(token, 10)
@@ -66,4 +73,8 @@ main :: proc() {
         os.exit(1)
     }
 
+}
+
+memory_dump :: proc(data_stack: ^[dynamic]u64, latest_word: ^kernel.Word) {
+    fmt.printfln("data_stack -> %v", data_stack^)
 }
