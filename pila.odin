@@ -90,5 +90,5 @@ read_input_as_string :: proc() -> (string, bool) {
     buf: [2048]u8
     n, err := os.read(os.stdin, buf[:])
     if err != nil do return "", false
-    return string(buf[:n]), true
+    return string(buf[:n - 1]), true
 }
