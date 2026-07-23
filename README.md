@@ -22,3 +22,7 @@ Or run a specific Pila source file if supported by the interpreter:
 ```sh
 ./pila test.pila
 ```
+
+## License
+
+Pila is released under the MIT License. See `LICENSE` for details.
