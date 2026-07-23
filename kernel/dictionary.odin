@@ -53,7 +53,7 @@ free_dictionary :: proc(latest_word: ^Word) {
 }
 
 find_word :: proc(name: string, latest: ^Word) -> ^Word {
-    current := latest.link
+    current := latest
     for current != nil {
         if current.name == name do return current
         current = current.link
