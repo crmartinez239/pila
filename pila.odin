@@ -47,8 +47,8 @@ main :: proc() {
         token := next_token(&parser)
 
         if token == "" {
-            memory_dump(&data_stack, latest_word)
             fmt.println("pila program exit")
+            memory_dump(&data_stack, latest_word)
             break
         }
 
@@ -71,7 +71,7 @@ main :: proc() {
         }
 
         // not a word or usable number
-        fmt.eprintln("undefined word")
+        fmt.eprintfln("undefined word: %s", token)
         os.exit(1)
     }
 
