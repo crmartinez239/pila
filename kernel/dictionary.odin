@@ -7,7 +7,7 @@ NativeProcResult :: enum {
     StackUnderflow
 }
 
-NativeProc :: proc(data_stack: ^[dynamic]u64) -> NativeProcResult 
+NativeProc :: proc(data_stack: ^Data_Stack) -> NativeProcResult 
 
 Primitive :: struct {
     name: string,

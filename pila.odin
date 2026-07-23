@@ -32,7 +32,7 @@ main :: proc() {
     latest_word := kernel.init_dictionary()
     defer kernel.free_dictionary(latest_word)
 
-    data_stack: [dynamic]u64
+    data_stack: kernel.Data_Stack
     defer delete(data_stack)
     
     // init outer interpreter
@@ -77,6 +77,6 @@ main :: proc() {
 
 }
 
-memory_dump :: proc(data_stack: ^[dynamic]u64, latest_word: ^kernel.Word) {
+memory_dump :: proc(data_stack: ^kernel.Data_Stack, latest_word: ^kernel.Word) {
     fmt.printfln("data_stack -> %v", data_stack^)
 }

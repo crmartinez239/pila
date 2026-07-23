@@ -2,20 +2,20 @@ package kernel
 
 import "core:fmt"
 
-DROP :: proc(data_stack: ^[dynamic]u64) -> NativeProcResult {
+DROP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 1 do return NativeProcResult.StackUnderflow
     pop(data_stack)
     return NativeProcResult.Success
 }
 
-DUP :: proc(data_stack: ^[dynamic]u64) -> NativeProcResult {
+DUP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 1 do return NativeProcResult.StackUnderflow
     u := data_stack^[0]
     append(data_stack, u)
     return NativeProcResult.Success
 }
 
-SWAP :: proc(data_stack: ^[dynamic]u64) -> NativeProcResult {
+SWAP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 2 do return NativeProcResult.StackUnderflow
     last := len(data_stack^) - 1
     u1 := data_stack^[last]
