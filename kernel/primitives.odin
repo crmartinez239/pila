@@ -18,6 +18,16 @@ DUP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
 }
 
 @(private)
+OVER :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
+    if (len(data_stack^)) < 2 do return NativeProcResult.StackUnderflow
+    last := len(data_stack^) - 1
+    n1 := data_stack^[last -1]
+    n2 := data_stack^[last]
+    append(data_stack, n1)
+    return NativeProcResult.Success
+}
+
+@(private)
 SWAP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 2 do return NativeProcResult.StackUnderflow
     last := len(data_stack^) - 1

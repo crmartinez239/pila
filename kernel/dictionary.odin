@@ -22,9 +22,10 @@ Word :: struct {
 
 init_dictionary :: proc() -> ^Word {
 
-    primitives := [3]Primitive {
+    primitives := [4]Primitive {
         {"DUP", DUP},
         {"DROP", DROP},
+        {"OVER", OVER},
         {"SWAP", SWAP},
     }
 
