@@ -2,12 +2,14 @@ package kernel
 
 import "core:fmt"
 
+@(private)
 DROP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 1 do return NativeProcResult.StackUnderflow
     pop(data_stack)
     return NativeProcResult.Success
 }
 
+@(private)
 DUP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 1 do return NativeProcResult.StackUnderflow
     u := data_stack^[0]
@@ -15,6 +17,7 @@ DUP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     return NativeProcResult.Success
 }
 
+@(private)
 SWAP :: proc(data_stack: ^Data_Stack) -> NativeProcResult {
     if (len(data_stack^)) < 2 do return NativeProcResult.StackUnderflow
     last := len(data_stack^) - 1
