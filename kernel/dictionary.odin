@@ -1,6 +1,13 @@
 package kernel
 
-NativeProc :: proc(data_stack: ^[dynamic]u64)
+import "core:fmt"
+
+NativeProcResult :: enum {
+    Success,
+    StackUnderflow
+}
+
+NativeProc :: proc(data_stack: ^[dynamic]u64) -> NativeProcResult 
 
 Primitive :: struct {
     name: string,
